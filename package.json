@@ -2,6 +2,8 @@
   "name": "joi-file-extensions",
   "version": "1.0.0",
   "description": "Joi extension for files",
+  "homepage": "https://github.com/jorgemsrs/joi-file-extensions",
+  "repository": "git@github.com:jorgemsrs/joi-file-extensions.git",
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
@@ -10,7 +12,13 @@
   "scripts": {
     "test": "tape $npm_package_directories_test/**/*.js"
   },
-  "keywords": ["schema", "validation", "file", "joi", "extension"],
+  "keywords": [
+    "schema",
+    "validation",
+    "file",
+    "joi",
+    "extension"
+  ],
   "author": "Jorge Silva <jorgemsrs@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
