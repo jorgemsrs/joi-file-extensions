@@ -2,6 +2,8 @@
 
 Joi extensions for file rules.
 
+[![Build Status](https://travis-ci.org/jorgemsrs/joi-file-extensions.svg?branch=master)](https://travis-ci.org/jorgemsrs/joi-file-extensions)
+
 # Usage
 
 ```js
