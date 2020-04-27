@@ -3,10 +3,18 @@
   "version": "2.0.0",
   "description": "Joi extension for files",
   "homepage": "https://github.com/jorgemsrs/joi-file-extensions",
+  "author": "Jorge Silva <jorgemsrs@gmail.com>",
   "repository": "https://github.com/jorgemsrs/joi-file-extensions.git",
+  "bugs": {
+    "url": "https://github.com/jorgemsrs/joi-file-extensions/issues"
+  },
+  "files": [
+    "lib/"
+  ],
   "main": "lib/index.js",
   "scripts": {
-    "test": "tape ./test/**/*.js"
+    "prepublishOnly": "npm audit",
+    "test": "nyc tape test/**/*.js | tap-nyc && nyc check-coverage"
   },
   "keywords": [
     "schema",
@@ -15,13 +23,15 @@
     "joi",
     "extension"
   ],
-  "author": "Jorge Silva <jorgemsrs@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "@hapi/joi": "^17.1.1",
+    "nyc": "^15.0.1",
+    "tap-nyc": "^1.0.3",
     "tape": "^5.0.0"
   },
   "peerDependencies": {
     "@hapi/joi": "^17.1.1"
-  }
+  },
+  "dependencies": {}
 }
