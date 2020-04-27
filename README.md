@@ -3,6 +3,7 @@
 Joi extensions for file rules.
 
 [![Build Status](https://travis-ci.org/jorgemsrs/joi-file-extensions.svg?branch=master)](https://travis-ci.org/jorgemsrs/joi-file-extensions)
+[![Coverage Status](https://coveralls.io/repos/github/jorgemsrs/joi-file-extensions/badge.svg?branch=master)](https://coveralls.io/github/jorgemsrs/joi-file-extensions?branch=master)
 
 # Usage
 
