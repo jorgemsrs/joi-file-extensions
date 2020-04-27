@@ -1,16 +1,12 @@
 {
   "name": "joi-file-extensions",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Joi extension for files",
   "homepage": "https://github.com/jorgemsrs/joi-file-extensions",
-  "repository": "git@github.com:jorgemsrs/joi-file-extensions.git",
+  "repository": "https://github.com/jorgemsrs/joi-file-extensions.git",
   "main": "lib/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
   "scripts": {
-    "test": "tape $npm_package_directories_test/**/*.js"
+    "test": "tape ./test/**/*.js"
   },
   "keywords": [
     "schema",
@@ -22,10 +18,10 @@
   "author": "Jorge Silva <jorgemsrs@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "joi": "13.1.2",
-    "tape": "4.9.0"
+    "@hapi/joi": "^17.1.1",
+    "tape": "^5.0.0"
   },
   "peerDependencies": {
-    "joi": ">=10.3.0"
+    "@hapi/joi": "^17.1.1"
   }
 }

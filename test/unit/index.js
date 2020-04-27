@@ -3,14 +3,14 @@
 const VICTIM_PATH = "../../";
 
 const setup = () => {
-  const BaseJoi = require("joi");
+  const BaseJoi = require("@hapi/joi");
   const FileExtension = require(VICTIM_PATH);
 
   return BaseJoi.extend(FileExtension);
 };
 
 const setupWithFile = (filename, content) => {
-  const BaseJoi = require("joi");
+  const BaseJoi = require("@hapi/joi");
   const { writeFileSync } = require("fs");
   const FileExtension = require(VICTIM_PATH);
 
@@ -22,15 +22,27 @@ const setupWithFile = (filename, content) => {
 const test = require("tape");
 
 test("Value must be String", function(t) {
-  t.plan(1);
+  t.plan(2);
 
   const Joi = setup();
   const schema = Joi.file();
 
-  t.equal(
-    Joi.validate(3, schema).error.message,
-    '"value" file must be a String. Got "3"'
-  );
+  const { error } = schema.validate(3);
+
+  t.notEqual(error, null);
+  t.equal(error.message, '"value" must be a string');
+});
+
+test("Encoding must be 'utf8' or null", function(t) {
+  t.plan(1);
+
+  try {
+    const Joi = setup();
+    Joi.file().contents({ encoding: 'other' });
+    t.fail();
+  } catch(e) {
+    t.equal(e.message, "encoding needs to be utf8 or null or reference");
+  }
 });
 
 test("Fails when file can't be read", function(t) {
@@ -39,12 +51,12 @@ test("Fails when file can't be read", function(t) {
   const Joi = setup();
   const schema = Joi.file().required();
   const filename = `file://${Date.now()}`;
-  const expectedError = `"value" file does not exist "${filename}"`;
+  const expectedError = `file "${filename}" does not exist`;
 
-  const result = Joi.validate(filename, schema);
+  const { error } = schema.validate(filename);
 
-  t.ok(result.error !== null);
-  t.equal(result.error.message, expectedError);
+  t.ok(error !== null);
+  t.equal(error.message, expectedError);
 });
 
 test("Get file contents as Buffer", function(t) {
@@ -53,11 +65,12 @@ test("Get file contents as Buffer", function(t) {
   const filename = `/tmp/jfe-test-${Date.now()}`;
   const expectedContent = `just a test ${Date.now()}`;
   const Joi = setupWithFile(filename, expectedContent);
-  const schema = Joi.file().contents(null);
-  const result = Joi.validate(filename, schema);
+  const schema = Joi.file().contents({ encoding: null });
 
-  t.ok(result.error === null);
-  t.deepEqual(result.value, Buffer.from(expectedContent));
+  const { value, error } = schema.validate(filename);
+
+  t.ok(error === undefined);
+  t.deepEqual(value, Buffer.from(expectedContent));
 });
 
 test("Get file contents as String (utf8)", function(t) {
@@ -66,9 +79,10 @@ test("Get file contents as String (utf8)", function(t) {
   const filename = `/tmp/jfe-test-${Date.now()}`;
   const expectedContent = `just a test ${Date.now()}`;
   const Joi = setupWithFile(filename, expectedContent);
-  const schema = Joi.file().contents("utf8");
-  const result = Joi.validate(filename, schema);
+  const schema = Joi.file().contents({ encoding: "utf8" });
+  
+  const { value, error } = schema.validate(filename);
 
-  t.ok(result.error === null);
-  t.deepEqual(result.value, expectedContent);
+  t.ok(error === undefined);
+  t.deepEqual(value, expectedContent);
 });
