@@ -8,11 +8,10 @@ Joi extensions for file rules.
 # Usage
 
 ```js
-const BaseJoi = require("@hapi/joi");
-const FileExtension = require("joi-file-extensions");
-const Joi = BaseJoi.extend(FileExtension);
+const joi = require("@hapi/joi");
+const customJoi = BaseJoi.extend(require("joi-file-extensions"));
 
-const schema = Joi.file().contents();
+const schema = customJoi.file().contents();
 ```
 
 ## Directory layout
