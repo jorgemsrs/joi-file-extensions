@@ -1,6 +1,6 @@
 {
   "name": "joi-file-extensions",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Joi extension for files",
   "homepage": "https://github.com/jorgemsrs/joi-file-extensions",
   "author": "Jorge Silva <jorgemsrs@gmail.com>",
